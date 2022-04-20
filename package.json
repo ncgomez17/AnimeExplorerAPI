@@ -1,0 +1,14 @@
+{
+  "name": "anime-explorer-api",
+  "main": "server.js",
+  "version": "1.0.0",
+  "author": "ncgomez17 & jmlgomez73",
+  "license": "GPL-3.0",
+  "repository": "https://github.com/ncgomez17/AnimeExplorerAPI",
+  "dependencies": {
+    "config": "^3.0.1",
+    "express": "^4.16.4",
+    "morgan": "^1.7.0",
+    "winston": "^3.1.0"
+  }
+}
