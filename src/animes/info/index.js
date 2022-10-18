@@ -4,12 +4,11 @@ const axios = require('axios')
 
 exports.getAnimeList = (req, res, next) => {
   // Simulate task list, normally this would be retrieved from a databasek
-  const animes = axios.get(config.urlKitsu+'anime')
+  animes = axios.get(config.urlKitsu+'anime')
     .then(function (response) {
       // handle success
       console.log(response);
-      res.setHeader('Content-Type', 'application/json')
-      res.status(200).json(response)
+      res.status(200).send(response.data)
     })
     .catch(function (error) {
       // handle error
