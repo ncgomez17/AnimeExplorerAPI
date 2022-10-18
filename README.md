@@ -9,7 +9,8 @@
 ## Usage
 ```
 npm install
-npm test
-npm run test-coverage
-npm start
+#npm test
+node server.js
 ```
+
+nodemon start

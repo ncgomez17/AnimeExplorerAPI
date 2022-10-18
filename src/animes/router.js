@@ -1,12 +1,11 @@
-'use strict';
 
 // Router
-const router = require('express').Router();
-const tasks = require('./index');
+const router = require('express').Router()
+const info = require('./info/index.js')
+//const tasks = require('./info/index.js')
 
 // Tasks
-router.get('/', tasks.findAll);
-router.post('/', tasks.buggyRoute);
-
+router.get('/getAnimeList', info.getAnimeList)
+router.post('/getAnime', info.getAnime)
 // Export the router
-module.exports = router;
+module.exports = router
