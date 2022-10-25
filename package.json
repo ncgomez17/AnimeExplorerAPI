@@ -16,7 +16,6 @@
     "winston": "^3.1.0"
   },
   "scripts": {
-    "test": "mocha",
-    "run": "nodemon start"
+    "test": "mocha --exit"
   }
 }
