@@ -8,7 +8,7 @@ const animesRouter = require('./src/animes/router')
 router.use(middleware.doSomethingInteresting)
 
 // Wire up routers
-router.use('/anime', animesRouter)
+router.use('/', animesRouter)
 
 // Wire up error-handling middleware
 router.use(errors.errorHandler)
