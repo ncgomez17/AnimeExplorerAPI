@@ -20,7 +20,7 @@ app.use(morgan('short', { stream: logger.stream }))
 app.use('/animeExplorer', routes)
 
 // Start the API
-app.listen(config.apiPort)
+app.listen(process.env.PORT||config.apiPort)
 logger.log('info', `api running on port ${config.apiPort}`)
 
 // Export API server for testing
