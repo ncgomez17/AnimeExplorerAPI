@@ -1,12 +1,10 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: Node.js CI
+name: Node.js CI/CD
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
     branches: [ "master" ]
 
 jobs:
@@ -20,15 +18,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: akhileshns/heroku-deploy@v3.12.12 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: "animeexplorerapi" #Must be unique in Heroku
-        heroku_email: "nico9cid@gmail.com"
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
