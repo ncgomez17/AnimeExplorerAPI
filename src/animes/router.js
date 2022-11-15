@@ -2,7 +2,6 @@
 // Router
 const router = require('express').Router()
 const info = require('./info/index.js')
-//const tasks = require('./info/index.js')
 
 // Tasks
 router.get('/getAnimeList', info.getAnimeList)

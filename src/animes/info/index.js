@@ -1,22 +1,30 @@
 const errors = require('../../errors')
-const config = require('../urlDatabases.js')
-const axios = require('axios')
+const kitsuService = require('../service/kitsuService')
 
 exports.getAnimeList = (req, res, next) => {
-  // Simulate task list, normally this would be retrieved from a databasek
-  animes = axios.get(config.urlKitsu+'anime')
-    .then(function (response) {
-      // handle success
-      console.log(response);
-      res.status(200).send(response.data)
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .finally(function () {
-      // always executed
+
+  try{
+    //actualizar campos de busqueda
+    var pageLimit= req.query.pageLimit ||10;
+    var pageOffset= req.query.pageOffset ||0;
+    var season = req.params.season;
+    var seasonYear = req.query.seasonYear;
+    var streamers = req.query.streamers;
+    var ageRating= req.query.ageRating;
+
+    kitsuService.getAnimeListKitsu(pageLimit, pageOffset, season, seasonYear, streamers, ageRating)
+    .then(value => {
+      res.send(value) 
+    }).catch(err => {
+      console.log(err);
     });
+  }catch(error) { // intercept the error in catch block
+    console.log(error)
+    // return error response
+    res
+        .status(500)
+        .json({ message: "Error in invocation of API: /animeExplorer" })
+  }
 
 }
 
