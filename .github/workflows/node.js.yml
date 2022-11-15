@@ -33,7 +33,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Render Deploy Action
-      uses: johnbeynon/render-deploy-action
+      uses: johnbeynon/render-deploy-action@v0.0.8
       with:
         service-id: ${{ secrets.SERVICEID }}
         api-key: ${{ secrets.APIKEY }}
