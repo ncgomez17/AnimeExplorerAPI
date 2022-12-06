@@ -4,10 +4,9 @@ const kitsuService = require('../service/kitsuService')
 exports.getAnimeList = (req, res, next) => {
 
   try{
-    //actualizar campos de busqueda
     var pageLimit= req.query.pageLimit ||10;
     var pageOffset= req.query.pageOffset ||0;
-    var season = req.params.season;
+    var season = req.query.season;
     var seasonYear = req.query.seasonYear;
     var streamers = req.query.streamers;
     var ageRating= req.query.ageRating;
@@ -15,12 +14,9 @@ exports.getAnimeList = (req, res, next) => {
     kitsuService.getAnimeListKitsu(pageLimit, pageOffset, season, seasonYear, streamers, ageRating)
     .then(value => {
       res.send(value) 
-    }).catch(err => {
-      console.log(err);
-    });
-  }catch(error) { // intercept the error in catch block
-    console.log(error)
-    // return error response
+    })
+  }catch(error) {
+    //lanzar servicio jikan
     res
         .status(500)
         .json({ message: "Error in invocation of API: /animeExplorer" })
@@ -29,6 +25,20 @@ exports.getAnimeList = (req, res, next) => {
 }
 
 exports.getAnime  = (req, res, next) => {
-  // Simulate a custom error
-  next(errors.newHttpError(400, 'bad request'))
+  try{
+    var id = req.query.id;
+    var name = req.query.name;
+    var genre = req.query.genre;
+    var episodeCount = req.query.episodeCount;
+
+    kitsuService.getAnime(id, name, genre, episodeCount)
+    .then(value => {
+      res.send(value) 
+    })
+  }catch(error) {
+    //lanzar servicio jikan
+    res
+        .status(500)
+        .json({ message: "Error in invocation of API: /animeExplorer" })
+  }
 }

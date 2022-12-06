@@ -1,17 +1,19 @@
 const errors = require('../../errors')
+const kitsuService = require('../service/kitsuService')
 
-exports.findAll = (req, res, next) => {
-  // Simulate task list, normally this would be retrieved from a database
-  const tasks = [
-    {'_id': 1, 'name': 'milk'},
-    {'_id': 2, 'name': 'cheese'},
-    {'_id': 3, 'name': 'milk'}
-  ]
+exports.getAnimeTrending  = (req, res, next) => {
+  try{
+    var pageLimit= req.query.pageLimit ||10;
+    var pageOffset= req.query.pageOffset ||0;
 
-  res.status(200).json(tasks)
-}
-
-exports.buggyRoute = (req, res, next) => {
-  // Simulate a custom error
-  next(errors.newHttpError(400, 'bad request'))
+    kitsuService.getAnimeTrending(pageLimit, pageOffset)
+    .then(value => {
+      res.send(value) 
+    })
+  }catch(error) {
+    //lanzar servicio jikan
+    res
+        .status(500)
+        .json({ message: "Error in invocation of API: /animeExplorer" })
+  }
 }
