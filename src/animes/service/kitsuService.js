@@ -1,5 +1,6 @@
 const config = require('../urlDatabases')
 const axios = require('axios');
+const configJikan = require('../../../config/default.json')
 
 const getAnimeListKitsu =  async (pageLimit, pageOffset, season, seasonYear,
   streamers, ageRating) => {
@@ -20,7 +21,7 @@ const getAnimeListKitsu =  async (pageLimit, pageOffset, season, seasonYear,
         },
         include :"genres"
       }
-    },{timeout:16000}).then(function (response) {
+    },{timeout:configJikan.timeOutJikan}).then(function (response) {
       var data =response.data.data
       var genres = response.data.included
 
@@ -47,7 +48,7 @@ const getAnime =  async (id, name, genre, episodeCount) => {
         },
         include :"genres"
       }
-    },{timeout:8000}).then(function (response) {
+    },{timeout:configJikan.timeOutJikan}).then(function (response) {
       var data =response.data.data
       var genres = response.data.included
       var animes = []
@@ -86,7 +87,7 @@ const getAnimeTrending =  async (pageLimit, pageOffset) => {
         offset: pageOffset
       }
     }
-  },{timeout:8000}).then(function (response) {
+  },{timeout:configJikan.timeOutJikan}).then(function (response) {
     var data =response.data.data
     var animes =[]
     data.forEach(element => {
