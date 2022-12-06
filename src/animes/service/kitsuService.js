@@ -20,7 +20,7 @@ const getAnimeListKitsu =  async (pageLimit, pageOffset, season, seasonYear,
         },
         include :"genres"
       }
-    },{timeout:8000}).then(function (response) {
+    },{timeout:16000}).then(function (response) {
       var data =response.data.data
       var genres = response.data.included
 
