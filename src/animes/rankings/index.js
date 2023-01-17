@@ -11,7 +11,22 @@ exports.getAnimeTrending  = (req, res, next) => {
       res.send(value) 
     })
   }catch(error) {
-    //lanzar servicio jikan
+    
+    res
+        .status(500)
+        .json({ message: "Error in invocation of API: /animeExplorer" })
+  }
+}
+exports.getAnimeRanking  = (req, res) => {
+
+  try{
+
+    kitsuService.getAnimeRanking()
+    .then(value => {
+      res.send(value) 
+      
+    })
+  }catch(error) {
     res
         .status(500)
         .json({ message: "Error in invocation of API: /animeExplorer" })

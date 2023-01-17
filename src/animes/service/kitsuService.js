@@ -104,4 +104,33 @@ const getAnimeTrending =  async (pageLimit, pageOffset) => {
   return response
 }
 
-module.exports = {getAnimeListKitsu, getAnime, getAnimeTrending}
+const getAnimeRanking =  async () => {
+  var response =  await axios.get(config.urlKitsu+'anime',{
+    params: {
+      sort: "popularityRank"
+    }
+  },{timeout:configKitsu.timeOutKitsu}).then(function (response) {
+    var data =response.data.data
+    var animes =[]
+    data.forEach(element => {
+      var animeRank = {
+        id: element.id,
+        name: element.attributes.canonicalTitle,
+        description : element.attributes.synopsis,
+        rating : element.attributes.averageRating,
+        popularityRank : element.attributes.popularityRank,
+        ratingRank : element.attributes.ratingRank,
+        ageRatingGuide : element.attributes.ageRatingGuide,
+        status : element.attributes.status,
+        episodeCount : element.attributes.episodeCount
+      }
+
+      animes.push(animeRank)
+    });
+
+    return animes
+  });
+  return response
+}
+
+module.exports = {getAnimeListKitsu, getAnime, getAnimeTrending, getAnimeRanking}
